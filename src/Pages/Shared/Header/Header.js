@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 
 const Header = () => {
+
     const menuItem = <>
-        <Link className='font-semibold' to='/'>Home</Link>
+        <Link className='font-semibold mr-5' to='/'>Home</Link>
+        <Link className='font-semibold' to='/login'>Login</Link>
     </>
 
     return (
@@ -27,6 +29,7 @@ const Header = () => {
                     {menuItem}
                 </ul>
             </div>
+
             <div className="navbar-end">
             <button className="btn btn-outline btn-secondary py-1">Appointment</button>
             </div>
