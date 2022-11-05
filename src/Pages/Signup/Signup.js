@@ -1,26 +1,37 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import image from '../../assets/images/login/login.svg';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Signup = () => {
-    const {signUp} = useContext(AuthContext);
+    const {user, signUp, updateUserProfile } = useContext(AuthContext);
 
-    const handleSignup =event=>{
+    const handleSignup = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password);
         signUp(email, password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => console.error(error));
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                handleUserUpdate(name);
+                toast.success('Successfully Sign Up');
+            })
+            .catch(error => console.error(error));
     }
-    
+
+    const handleUserUpdate = (name) => {
+        const profile = {
+            displayName: name
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(e => console.log(e))
+    }
+
     return (
         <div className="hero ">
             <div className="hero-content flex-col lg:flex-row">
